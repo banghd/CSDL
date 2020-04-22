@@ -16,10 +16,10 @@
         header("Location: login.php");
         exit();
     }
-    $row = "sometddhing";
+    
     ?>
     <nav class="navbar navbar-expand-md bg-dark custom-navbar navbar-dark">
-        <img class="navbar-brand " src="https://scontent-hkt1-1.xx.fbcdn.net/v/t1.0-9/84248416_2511972925729333_4913538501833654272_n.jpg?_nc_cat=102&_nc_sid=85a577&_nc_ohc=PapX4_DEZTQAX8pREqk&_nc_ht=scontent-hkt1-1.xx&oh=7eca3f411f34038e403a00b06bda83d2&oe=5EBC69A0" id="logo_custom" width="5%" alt="logo">
+        <img class="navbar-brand " src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSHCeBAhA0Tg7PkjVQs4Vzf0mcD7h2FXTf8as3K5hKa8khjAVHh&usqp=CAU" id="logo_custom" width="5%" alt="logo">
         <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon "></span>
         </button>
@@ -29,7 +29,7 @@
                     <a class="nav-link" href="#offer"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><b>Create survey</b></a>
+                    <a class="nav-link" href="createsurvey.php"><b>Create survey</b></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../login.php"><b>Logout</b></a>
@@ -62,8 +62,12 @@
                 ';
                 while($row = mysqli_fetch_array($result)){
                      $temp = str_ireplace('content',$row['content'],$survey);
-                     
-                echo str_replace('name',$row['name'],$temp);
+                     $row1 = $row['ownerID'];
+                     $name = mysqli_query($con,"select * from users where id ='$row1'");
+                    
+                     $temp2 = str_ireplace('owner',mysqli_fetch_row($name)[1],$temp);
+                echo str_replace('name',$row['name'],$temp2);
+                //echo mysqli_fetch_row($name)[1];
                 }
                 ?>
 
